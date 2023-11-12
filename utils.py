@@ -104,6 +104,8 @@ def read_config_file():
 
     # Read in the enabled modules.
     modules_enabled = get_list_from_file(dot_ns3rc_path, 'modules_enabled')
+    modules_enabled = ['lorawan']
+    
     if not modules_enabled:
         # Enable all modules if the modules_enabled line can't be found.
         modules_enabled = ['all_modules']

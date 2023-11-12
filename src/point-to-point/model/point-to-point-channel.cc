@@ -97,10 +97,15 @@ PointToPointChannel::TransmitStart(Ptr<const Packet> p, Ptr<PointToPointNetDevic
     uint32_t wire = src == m_link[0].m_src ? 0 : 1;
 
     Simulator::ScheduleWithContext(m_link[wire].m_dst->GetNode()->GetId(),
-                                   txTime + m_delay,
+                                   txTime ,
                                    &PointToPointNetDevice::Receive,
                                    m_link[wire].m_dst,
                                    p->Copy());
+    // Simulator::ScheduleWithContext(m_link[wire].m_dst->GetNode()->GetId(),
+    //                             txTime + m_delay,
+    //                             &PointToPointNetDevice::Receive,
+    //                             m_link[wire].m_dst,
+    //                             p->Copy());
 
     // Call the tx anim callback on the net device
     m_txrxPointToPoint(p, src, m_link[wire].m_dst, txTime, txTime + m_delay);

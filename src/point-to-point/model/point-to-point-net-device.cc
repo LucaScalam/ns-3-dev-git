@@ -249,8 +249,10 @@ PointToPointNetDevice::TransmitStart(Ptr<Packet> p)
     m_currentPkt = p;
     m_phyTxBeginTrace(m_currentPkt);
 
-    Time txTime = m_bps.CalculateBytesTxTime(p->GetSize());
-    Time txCompleteTime = txTime + m_tInterframeGap;
+    // Time txTime = m_bps.CalculateBytesTxTime(p->GetSize());
+    Time txTime = Seconds(0);
+    // Time txCompleteTime = txTime + m_tInterframeGap;
+    Time txCompleteTime = Seconds(0);
 
     NS_LOG_LOGIC("Schedule TransmitCompleteEvent in " << txCompleteTime.As(Time::S));
     Simulator::Schedule(txCompleteTime, &PointToPointNetDevice::TransmitComplete, this);
